@@ -101,6 +101,13 @@
 	/** Show a time picker with the specified precision */
 	export let timePrecision: 'minute' | 'second' | 'millisecond' | null = null
 
+	/** Disabled dates on calendar*/
+	export let disabledDates: Date[] = []
+
+	/** Enabled dates. Only days listed in this array will be enabled.
+	 * disabledDates prop will be ignored if this is used */
+	export let enabledDates: Date[] = []
+
 	// handle on:focusout for parent element. If the parent element loses
 	// focus (e.g input element), visible is set to false
 	function onFocusOut(e: FocusEvent) {
@@ -232,6 +239,8 @@
 				{locale}
 				{browseWithoutSelecting}
 				{timePrecision}
+				{disabledDates}
+				{enabledDates}
 			>
 				<slot />
 			</DateTimePicker>
