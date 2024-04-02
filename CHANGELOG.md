@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.12.1
+
+### Patch Changes
+
+- 2ac4241: fix: disable year and month on dropdown if enabledDates is activated.
+
 ## 2.12.0
 
 ### Minor Changes
