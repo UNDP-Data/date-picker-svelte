@@ -22,7 +22,11 @@
 	{#if values}
 		<select bind:value>
 			{#each values as value}
-				<option {value}>{String(value)}</option>
+				{#if value && typeof value === 'object' && 'key' in value && 'value' in value}
+					<option {value}>{String(value.key)}</option>
+				{:else}
+					<option {value}>{String(value)}</option>
+				{/if}
 			{/each}
 		</select>
 	{:else if typeof value === 'string'}
@@ -37,7 +41,7 @@
 			dynamicPositioning
 		/>
 	{:else if value instanceof Object}
-		<textarea bind:value={jsonValue} on:input={jsonInput} />
+		<textarea bind:value={jsonValue} on:input={jsonInput}></textarea>
 	{:else}
 		<div>
 			<slot />
@@ -47,11 +51,11 @@
 
 <style lang="sass">
 	.prop
+		padding: 5px 0px
+		align-items: center
 		display: block
 		@media (min-width: 450px)
 			display: flex
-		padding: 5px 0px
-		align-items: center
 	.label
 		width: 195px
 		flex-shrink: 0
