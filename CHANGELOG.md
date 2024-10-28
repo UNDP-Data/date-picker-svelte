@@ -1,9 +1,17 @@
 # Changelog
 
+## 2.14.1
+
+### Patch Changes
+
+- 8363ac0: merge upstream repository changes and upgrade it to svelte 5
+
 ## 2.14.0 - 2024 Oct 23
+
 - Add Svelte 5 support
 
 ## 2.13.0 - 2024 May 23
+
 - Add MMM format to allow short month names (@peterbell215)
 - Add date-fns 3 support
 
@@ -14,6 +22,7 @@
 - 2ac4241: fix: disable year and month on dropdown if enabledDates is activated.
 
 ## 2.12.0 - 2024 Apr 9
+
 - Disable autocomplete for date input (@gianarb)
 
 ## 2.11.0 - 2024 Feb 26
