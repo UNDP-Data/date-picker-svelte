@@ -170,7 +170,7 @@
 		return enabledDates?.length > 0
 			? enabledDates.filter((day) => {
 					return day?.getFullYear() === year
-			  }).length === 0
+				}).length === 0
 			: false
 	}
 
@@ -178,7 +178,7 @@
 		return enabledDates?.length > 0
 			? enabledDates.filter((day) => {
 					return day?.getFullYear() === date.getFullYear() && day?.getMonth() === date.getMonth()
-			  }).length === 0
+				}).length === 0
 			: false
 	}
 
