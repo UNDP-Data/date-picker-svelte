@@ -2,6 +2,8 @@
 	import DateInput from '$lib/DateInput.svelte'
 	import Prop from './prop.svelte'
 	import Split from './split.svelte'
+	import { localeFromDateFnsLocale } from '$lib'
+	import { hy, de, nb } from 'date-fns/locale'
 
 	let id: string
 	let placeholder: string
@@ -21,6 +23,13 @@
 	let disabledDay2 = new Date(disabledDay1)
 	disabledDay2.setDate(disabledDay1.getDate() + 1)
 	let disabledDates = [disabledDay1, disabledDay2].filter((d) => d !== undefined)
+	let locales = [
+		{ key: 'default', value: localeFromDateFnsLocale({}) },
+		{ key: 'nb (date-fns)', value: localeFromDateFnsLocale(nb) },
+		{ key: 'de (date-fns)', value: localeFromDateFnsLocale(de) },
+		{ key: 'hy (date-fns)', value: localeFromDateFnsLocale(hy) },
+	]
+	let locale = locales[0]
 </script>
 
 <Split>
@@ -41,6 +50,7 @@
 		bind:dynamicPositioning
 		bind:timePrecision
 		bind:disabledDates
+		bind:locale={locale.value}
 	/>
 
 	<svelte:fragment slot="right">
@@ -58,7 +68,7 @@
 		<Prop label="closeOnSelection" bind:value={closeOnSelection} />
 		<Prop label="browseWithoutSelecting" bind:value={browseWithoutSelecting} />
 		<Prop label="dynamicPositioning" bind:value={dynamicPositioning} />
-		<Prop label="locale">Default</Prop>
+		<Prop label="locale" bind:value={locale} values={locales} />
 		<Prop
 			label="timePrecision"
 			bind:value={timePrecision}
