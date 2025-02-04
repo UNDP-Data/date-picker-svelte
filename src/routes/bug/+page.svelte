@@ -2,7 +2,7 @@
 	import DatePicker from '$lib/DatePicker.svelte'
 
 	let min = new Date(2024, 1, 26, 17, 30)
-	let value: Date | undefined
+	let value: Date | undefined = $state()
 </script>
 
 <DatePicker timePrecision="minute" {min} bind:value />

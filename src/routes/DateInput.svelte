@@ -5,55 +5,56 @@
 	import { localeFromDateFnsLocale } from '$lib'
 	import { hy, de, nb } from 'date-fns/locale'
 
-	let id: string
-	let placeholder: string
-	let value: Date
-	let min: Date
-	let max: Date
-	let valid: boolean
-	let visible: boolean
-	let disabled: boolean
-	let required: boolean
-	let closeOnSelection: boolean
-	let browseWithoutSelecting: boolean
-	let format: string
-	let dynamicPositioning: boolean = true
-	let timePrecision: 'minute' | 'second' | 'millisecond' | null = null
+	let id: string = $state('')
+	let placeholder: string = $state('')
+	let value: Date | undefined = $state()
+	let min: Date | undefined = $state()
+	let max: Date | undefined = $state()
+	let valid: boolean = $state(false)
+	let visible: boolean = $state(false)
+	let disabled: boolean = $state(false)
+	let required: boolean = $state(false)
+	let closeOnSelection: boolean = $state(false)
+	let browseWithoutSelecting: boolean = $state(false)
+	let format: string = $state('')
+	let dynamicPositioning: boolean = $state(true)
+	let timePrecision: 'minute' | 'second' | 'millisecond' | null = $state(null)
 	let disabledDay1 = new Date()
 	let disabledDay2 = new Date(disabledDay1)
 	disabledDay2.setDate(disabledDay1.getDate() + 1)
-	let disabledDates = [disabledDay1, disabledDay2].filter((d) => d !== undefined)
+	let disabledDates = $state([disabledDay1, disabledDay2].filter((d) => d !== undefined))
 	let locales = [
 		{ key: 'default', value: localeFromDateFnsLocale({}) },
 		{ key: 'nb (date-fns)', value: localeFromDateFnsLocale(nb) },
 		{ key: 'de (date-fns)', value: localeFromDateFnsLocale(de) },
 		{ key: 'hy (date-fns)', value: localeFromDateFnsLocale(hy) },
 	]
-	let locale = locales[0]
+	let locale = $state(locales[0])
 </script>
 
 <Split>
-	<DateInput
-		slot="left"
-		bind:id
-		bind:value
-		bind:min
-		bind:max
-		bind:placeholder
-		bind:valid
-		bind:format
-		bind:visible
-		bind:disabled
-		bind:required
-		bind:closeOnSelection
-		bind:browseWithoutSelecting
-		bind:dynamicPositioning
-		bind:timePrecision
-		bind:disabledDates
-		bind:locale={locale.value}
-	/>
+	{#snippet left()}
+		<DateInput
+			bind:id
+			bind:value
+			bind:min
+			bind:max
+			bind:placeholder
+			bind:valid
+			bind:format
+			bind:visible
+			bind:disabled
+			bind:required
+			bind:closeOnSelection
+			bind:browseWithoutSelecting
+			bind:dynamicPositioning
+			bind:timePrecision
+			bind:disabledDates
+			bind:locale={locale.value}
+		/>
+	{/snippet}
 
-	<svelte:fragment slot="right">
+	{#snippet right()}
 		<h3 class="no-top">Props</h3>
 		<Prop label="value">{value}</Prop>
 		<Prop label="min" bind:value={min} />
@@ -75,7 +76,7 @@
 			values={[null, 'minute', 'second', 'millisecond']}>{timePrecision}</Prop
 		>
 		{#each disabledDates as day, index}
-			<Prop label="disabledDate {index + 1}" bind:value={day} />
+			<Prop label="disabledDate {index + 1}" value={day} />
 		{/each}
-	</svelte:fragment>
+	{/snippet}
 </Split>
