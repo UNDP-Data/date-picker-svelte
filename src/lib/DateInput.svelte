@@ -8,12 +8,16 @@
 	import { writable } from 'svelte/store'
 	import { createEventDispatcher } from 'svelte'
 
+	/**
+	 * Fires when the user selects a new value in the DatePicker by clicking on a date or by pressing enter
+	 */
 	const dispatch = createEventDispatcher<{
-		/** Fires when the user selects a new value in the DatePicker by clicking on a date or by pressing enter */
 		select: Date
 	}>()
 
-	/** Default date to display in picker before value is assigned */
+	/**
+	 * Default date to display in picker before value is assigned
+	 */
 	const defaultDate = new Date()
 
 	// inner date value store for preventing value updates (and also
@@ -105,11 +109,14 @@
 	export let disabledDates: Date[] = []
 
 	/** Enabled dates. Only days listed in this array will be enabled.
-	 * disabledDates prop will be ignored if this is used */
+	 * disabledDates prop will be ignored if this is used
+	 * */
 	export let enabledDates: Date[] = []
 
-	// handle on:focusout for parent element. If the parent element loses
-	// focus (e.g input element), visible is set to false
+	/**
+	 * handle on:focusout for parent element. If the parent element loses
+	 * focus (e.g input element), visible is set to false
+	 */
 	function onFocusOut(e: FocusEvent) {
 		if (
 			e?.currentTarget instanceof HTMLElement &&
